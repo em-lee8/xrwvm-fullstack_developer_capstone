@@ -79,13 +79,12 @@ app.get('/fetchDealers/:state', async (req, res) => {
 
 app.get('/fetchDealer/:id', async (req, res) => {
     try {
-        const document = await Dealerships.find({ id: req.params.id });
+        const document = await Dealerships.findOne({ id: req.params.id });
         res.json(document);
     } catch (error) {
         res.status(500).json({ error: 'Error fetching document' });
     }
 });
-
 
 // Start the Express server
 app.listen(port, () => {
