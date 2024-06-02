@@ -48,13 +48,13 @@ app.get('/fetchReviews', async (req, res) => {
 
 
 app.get('/fetchReviews/dealer/:id', async (req, res) => {
-  try {
-    const documents = await Reviews.find({dealership: req.params.id});
-    res.json(documents);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching documents' });
-  }
-});
+    try {
+      const documents = await Reviews.find({dealership: req.params.id});
+      res.json(documents);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching Reviews for dealship documents' });
+    }
+  });
 
 
 app.get('/fetchDealers', async (req, res) => {
@@ -79,12 +79,12 @@ app.get('/fetchDealers/:state', async (req, res) => {
 
 app.get('/fetchDealer/:id', async (req, res) => {
     try {
-        const document = await Dealerships.findOne({ id: req.params.id });
-        res.json(document);
+      const documents = await Dealerships.find({ id: req.params.id });
+      res.json(documents);
     } catch (error) {
-        res.status(500).json({ error: 'Error fetching document' });
+      res.status(500).json({ error: 'Error fetching dealers by ID' });
     }
-});
+  });
 
 // Start the Express server
 app.listen(port, () => {
