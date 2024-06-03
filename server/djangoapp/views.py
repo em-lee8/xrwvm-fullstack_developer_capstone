@@ -1,7 +1,15 @@
 # Uncomment the required imports before adding the code
 
+# from django.shortcuts import render
+# from django.http import HttpResponse
 from django.contrib.auth.models import User
+# from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout
+# from django.contrib import messages
+# from datetime import datetime
+from .models import CarMake, CarModel
+# from .restapis import get_request, analyze_review_sentiments, post_review
+from .restapis import get_request, analyze_review_sentiments
 
 from django.http import JsonResponse
 from django.contrib.auth import login, authenticate
@@ -9,8 +17,6 @@ import logging
 import json
 from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
-from .models import CarMake, CarModel
-from .restapis import get_request, analyze_review_sentiments, post_review
 
 
 # Get an instance of a logger
@@ -136,15 +142,12 @@ def get_dealer_details(request, dealer_id):
 
 
 def add_review(request):
-    if not cond (request.user.is_anonymous == False):
-        data = json.loads(request.body)
+    if (request.user.is_anonymous is False):
+        # data = json.loads(request.body)
         try:
-            JsonResponse = post_review(data)
+            # response = post_review(data)
             return JsonResponse({"status": 200})
-        except Exception:
-            return JsonResponse({
-                "status": 401,
-                "message": "Error in posting review"
-            })
+        except Exception as e:
+            return JsonResponse({"status": 401, "message": e})
     else:
         return JsonResponse({"status": 403, "message": "Unauthorized"})
