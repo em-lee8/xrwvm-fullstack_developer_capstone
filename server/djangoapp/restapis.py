@@ -19,7 +19,7 @@ def get_request(endpoint, **kwargs):
     params = ""
     if(kwargs):
         for key, value in kwargs.items():
-            params=param s + key + "=" + value + "&"
+            params=param s+key+"="+value+"&"
 
     request_url = backend_url+endpoint+"?"+params
 
